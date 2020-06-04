@@ -60,15 +60,15 @@ const followersArray = [];
     </div>
 */
 
+const card = document.querySelector('.cards')
 
-
-let myKey = axios.get('https://api.github.com/users/Cking351')
+axios.get('https://api.github.com/users/Cking351')
   .then(response => {
     console.log('Heres a response from the API', response)
-    let card = document.querySelector('.cards')
     card.appendChild(githubCardMaker(response.data))
   })
   .catch(error => {
+    debugger
     console.log('DAS HECKIN ERROR', error)
   })
 
@@ -78,7 +78,7 @@ let myKey = axios.get('https://api.github.com/users/Cking351')
   const {avatar_url, bio, followers, following, html_url, location, login, name} = attributes
 
   // Create variables holding HTML elements
-  const card = document.querySelector('.cards')
+  // const card = document.querySelector('.cards')
   const gitHubCard = document.createElement('div')
   const cardImage = document.createElement('img')
   const cardInfo = document.createElement('div')
