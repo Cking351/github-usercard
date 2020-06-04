@@ -4,6 +4,15 @@
     https://api.github.com/users/<your name>
 */
 
+// axios.get('https://api.github.com/users/Cking351')
+//   .then(response => {
+//     console.log('Heres a response from the API', response)
+//   })
+//   .catch(error => {
+//     console.log('DAS HECKIN ERROR', error)
+//   })
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -16,6 +25,7 @@
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -49,6 +59,77 @@ const followersArray = [];
       </div>
     </div>
 */
+
+const card = document.querySelector('.cards')
+
+axios.get('https://api.github.com/users/Cking351')
+  .then(response => {
+    console.log('Heres a response from the API', response)
+    card.appendChild(githubCardMaker(response.data))
+  })
+  .catch(error => {
+    debugger
+    console.log('DAS HECKIN ERROR', error)
+  })
+
+
+ function githubCardMaker (attributes) {
+
+  const {avatar_url, bio, followers, following, html_url, location, login, name} = attributes
+
+  // Create variables holding HTML elements
+  // const card = document.querySelector('.cards')
+  const gitHubCard = document.createElement('div')
+  const cardImage = document.createElement('img')
+  const cardInfo = document.createElement('div')
+  const cardName = document.createElement('h3')
+  const cardUser = document.createElement('p')
+  const cardLocation = document.createElement('p')
+  const cardProfileContainer = document.createElement('p')
+  const cardProfileContents = document.createElement('a')
+  const cardFollowers = document.createElement('p')
+  const cardFollowing = document.createElement('p')
+  const cardBio = document.createElement('p')
+
+  // Assign classes to variables
+  gitHubCard.classList.add('card')
+  cardInfo.classList.add('card-info')
+  cardName.classList.add('name')
+  cardUser.classList.add('username')
+  
+  // Create Text Content for variables
+  cardImage.src = `${avatar_url}`
+  cardName.textContent = `${name}`
+  cardUser.textContent = `${login}`
+  cardLocation.textContent = `${location}`
+  cardProfileContainer.textContent = `Profile: ${html_url}`
+  cardFollowers.textContent = `${followers}`
+  cardFollowing.textContent = `${following}`
+  cardBio.textContent = `${bio}`
+
+
+
+
+  //Create structure for variables
+  card.appendChild(gitHubCard)
+  gitHubCard.appendChild(cardImage)
+  gitHubCard.appendChild(cardInfo)
+  cardInfo.appendChild(cardName)
+  cardInfo.appendChild(cardUser)
+  cardInfo.appendChild(cardLocation)
+  cardInfo.appendChild(cardProfileContainer)
+  cardInfo.appendChild(cardFollowers)
+  cardInfo.appendChild(cardFollowing)
+  cardInfo.appendChild(cardBio)
+
+  
+
+  return card
+
+}
+
+
+
 
 /*
   List of LS Instructors Github username's:
