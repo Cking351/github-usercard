@@ -62,13 +62,15 @@ const followersArray = [];
 
 
 
-  let myKey = axios.get('https://api.github.com/users/Cking351')
-    .then(response => {
-      console.log('Heres a response from the API', response)
-    })
-    .catch(error => {
-      console.log('DAS HECKIN ERROR', error)
-    })
+let myKey = axios.get('https://api.github.com/users/Cking351')
+  .then(response => {
+    console.log('Heres a response from the API', response)
+    let card = document.querySelector('.cards')
+    card.appendChild(githubCardMaker(response.data))
+  })
+  .catch(error => {
+    console.log('DAS HECKIN ERROR', error)
+  })
 
 
  function githubCardMaker (attributes) {
@@ -96,18 +98,15 @@ const followersArray = [];
   cardUser.classList.add('username')
   
   // Create Text Content for variables
-  cardImage.href = `${avatar_url}`
+  cardImage.src = `${avatar_url}`
   cardName.textContent = `${name}`
   cardUser.textContent = `${login}`
   cardLocation.textContent = `${location}`
-  cardProfileContainer.textContent = 'Profile: '
-  cardProfileContents.href = `${html_url}`
+  cardProfileContainer.textContent = `Profile: ${html_url}`
   cardFollowers.textContent = `${followers}`
   cardFollowing.textContent = `${following}`
   cardBio.textContent = `${bio}`
 
-
-  cardProfileContainer.appendChild(cardProfileContents)
 
 
 
@@ -119,24 +118,16 @@ const followersArray = [];
   cardInfo.appendChild(cardUser)
   cardInfo.appendChild(cardLocation)
   cardInfo.appendChild(cardProfileContainer)
-  cardInfo.appendChild(cardProfileContents)
   cardInfo.appendChild(cardFollowers)
   cardInfo.appendChild(cardFollowing)
   cardInfo.appendChild(cardBio)
 
-  let elements = [avatar_url, bio, followers, following, html_url, location, login, name]
-
-  elements.forEach(obj => {
-    
-  })
   
 
-
-  console.log(card)
   return card
 
 }
-githubCardMaker(myKey)
+
 
 
 
