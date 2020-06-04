@@ -4,6 +4,15 @@
     https://api.github.com/users/<your name>
 */
 
+axios.get('https://api.github.com/users/Cking351')
+  .then(response => {
+    console.log('Heres a response from the API', response)
+  })
+  .catch(error => {
+    console.log('DAS HECKIN ERROR', error)
+  })
+
+
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
